@@ -25,7 +25,7 @@
                     MoneyAdded(this, new EventArgs());
             }
             else
-                throw new Exception("Incorrect deposit amount.");
+                throw new Exception("Podano złą wartość kwoty.");
         }
 
         public override void AddMoney(double money)
@@ -45,7 +45,7 @@
             if (float.TryParse(money, out float value))
                 AddMoney(value);
             else
-                throw new Exception("Invalid deposit amount entered in the string.");
+                throw new Exception("Wprowadzona kwota nie jest zmienną typu string.");
         }
 
         public override Statistics GetStatistics()
@@ -79,6 +79,10 @@
                         line = reader.ReadLine();
                     }
                 }
+            }
+            else
+            {
+                throw new Exception("Nie ma takiego miesiąca rozliczeniowego!");
             }
 
             return money;

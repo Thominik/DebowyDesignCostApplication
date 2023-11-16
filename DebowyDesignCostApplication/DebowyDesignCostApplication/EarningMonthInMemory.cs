@@ -33,7 +33,7 @@
 
         public override void AddMoney(int money)
         {
-            var intAsFloat = (int)money;
+            var intAsFloat = (float)money;
             AddMoney(intAsFloat);
         }
 

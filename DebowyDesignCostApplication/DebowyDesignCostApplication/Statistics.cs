@@ -31,7 +31,7 @@
         {
             get
             {
-                if (Average < AverageNationalNetSalary)
+                if (Average < MinimumNationalNetSalary)
                     return false;
                 else
                     return true;

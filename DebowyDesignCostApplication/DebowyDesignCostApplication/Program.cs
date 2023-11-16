@@ -27,10 +27,12 @@ switch (menuInput)
 {
     case "1":
         Console.Clear();
-        Console.WriteLine("Podaj miesiąc rozliczeniowy: ");
+        Console.WriteLine("Podaj miesiąc rozliczeniowy: (jeśli chcesz wyjść wypisz i zatwierdź q)");
         Console.WriteLine();
 
         var monthInput = Console.ReadLine().ToLower();
+
+        Console.WriteLine();
 
         if (monthInput != null)
         {
@@ -40,7 +42,9 @@ switch (menuInput)
         while (true)
         {
             Console.WriteLine("Podaj kolejną kwotę:");
+
             var input = Console.ReadLine();
+
             if (input == "q")
             {
                 break;
@@ -83,7 +87,7 @@ switch (menuInput)
         if (statistics.MiminumNetSalary == true)
             Console.WriteLine("Zarobek w tym miesiącu jest większy od minimalnej krajowej wypłaty.");
         else
-            Console.WriteLine("Zarobek w tym miesiącu jest mniejszy od minimalnej krajowej wypłaty.");  
+            Console.WriteLine("Zarobek w tym miesiącu jest mniejszy od minimalnej krajowej wypłaty.");
         break;
 }
 
