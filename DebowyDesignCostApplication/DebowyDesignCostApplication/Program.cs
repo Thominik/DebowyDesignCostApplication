@@ -1,21 +1,13 @@
 ﻿using DebowyDesignCostApplication;
 
-Console.WriteLine("Witaj w programie do wyliczania statystyki dochodu miesięcznego w DębowyDesign!");
-Console.WriteLine();
-Console.WriteLine("Pamiętaj, że jeśli chcesz wyjść to wpisz q");
-Console.WriteLine();
-Console.WriteLine("Gotowy? (potwierdź jakim kolwiek klawiszem)");
-Console.WriteLine();
+WelcomeScreenPrint();
 
 var inputKey = Console.ReadKey();
 
 if (inputKey != null)
     Console.Clear();
 
-Console.WriteLine("Wybierz co chcesz zrobić (zatwierdź klawiszem enter):");
-Console.WriteLine("1. Dodać zarobioną kwotę");
-Console.WriteLine("2. Wyświetlić statystyki dla danego miesiąca");
-Console.WriteLine();
+Menu();
 
 var currentMonth = new EarningMonthInFile("");
 
@@ -47,6 +39,17 @@ switch (menuInput)
 
             if (input == "q")
             {
+                Console.Clear();
+                Console.WriteLine($"Statystyki zarobków w {monthInput}");
+                Console.WriteLine();
+
+                var stat = currentMonth.GetStatistics();
+
+                GetStatisticsPrint(stat);
+
+                AvgSalaryVerification(stat);
+
+                MinSalaryVerification(stat);
                 break;
             }
 
@@ -70,24 +73,17 @@ switch (menuInput)
         currentMonth = new EarningMonthInFile(monthInputToStatistics);
 
         Console.Clear();
-
         Console.WriteLine($"Statystyki zarobków w {monthInputToStatistics}");
         Console.WriteLine();
 
         var statistics = currentMonth.GetStatistics();
-        Console.WriteLine($"Średnia zarobiona kwota: {statistics.Average:N2}");
-        Console.WriteLine($"Minimalny zarobek: {statistics.Min}");
-        Console.WriteLine($"Maksymalny zarobek: {statistics.Max}");
 
-        if (statistics.AverageNetSalary == true)
-            Console.WriteLine("Zarobek w tym miesiącu jest większy od średniej krajowej wypłaty.");
-        else
-            Console.WriteLine("Zarobek w tym miesiącu jest mniejszy niż średnia krajowa wypłata.");
+        GetStatisticsPrint(statistics);
 
-        if (statistics.MiminumNetSalary == true)
-            Console.WriteLine("Zarobek w tym miesiącu jest większy od minimalnej krajowej wypłaty.");
-        else
-            Console.WriteLine("Zarobek w tym miesiącu jest mniejszy od minimalnej krajowej wypłaty.");
+        AvgSalaryVerification(statistics);
+
+        MinSalaryVerification(statistics);
+
         break;
 }
 
@@ -95,4 +91,45 @@ switch (menuInput)
 void MoneyAdded(object sender, EventArgs args)
 {
     Console.WriteLine("Dodano zarobioną kwotę.");
+}
+
+void AvgSalaryVerification(Statistics statistics)
+{
+    if (statistics.AverageNetSalary == true)
+        Console.WriteLine("Zarobek w tym miesiącu jest większy od średniej krajowej wypłaty.");
+    else
+        Console.WriteLine("Zarobek w tym miesiącu jest mniejszy niż średnia krajowa wypłata.");
+}
+
+void MinSalaryVerification(Statistics statistics)
+{
+    if (statistics.MiminumNetSalary == true)
+        Console.WriteLine("Zarobek w tym miesiącu jest większy od minimalnej krajowej wypłaty.");
+    else
+        Console.WriteLine("Zarobek w tym miesiącu jest mniejszy od minimalnej krajowej wypłaty.");
+}
+
+void GetStatisticsPrint(Statistics statistics)
+{
+    Console.WriteLine($"Średnia zarobiona kwota: {statistics.Average:N2}");
+    Console.WriteLine($"Minimalny zarobek: {statistics.Min}");
+    Console.WriteLine($"Maksymalny zarobek: {statistics.Max}");
+}
+
+void WelcomeScreenPrint()
+{
+    Console.WriteLine("Witaj w programie do wyliczania statystyki dochodu miesięcznego w DębowyDesign!");
+    Console.WriteLine();
+    Console.WriteLine("Pamiętaj, że jeśli chcesz wyjść to wpisz q");
+    Console.WriteLine();
+    Console.WriteLine("Gotowy? (potwierdź jakim kolwiek klawiszem)");
+    Console.WriteLine();
+}
+
+void Menu()
+{
+    Console.WriteLine("Wybierz co chcesz zrobić (zatwierdź klawiszem enter):");
+    Console.WriteLine("1. Dodać zarobioną kwotę");
+    Console.WriteLine("2. Wyświetlić statystyki dla danego miesiąca");
+    Console.WriteLine();
 }

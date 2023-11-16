@@ -14,7 +14,7 @@
         {
             if (money > 0)
             {
-                payment.Add(money); ;
+                payment.Add(money);
 
                 if (MoneyAdded != null)
                 {
