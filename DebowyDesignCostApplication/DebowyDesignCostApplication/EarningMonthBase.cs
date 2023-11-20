@@ -14,9 +14,26 @@
         public string Month { get; private set; }
 
         public abstract void AddMoney(float money);
-        public abstract void AddMoney(double money);
-        public abstract void AddMoney(int money);
-        public abstract void AddMoney(string money);
         public abstract Statistics GetStatistics();
+
+        public void AddMoney(string money)
+        {
+            if (float.TryParse(money, out float value))
+                AddMoney(value);
+            else
+                throw new Exception("Wprowadzona kwota nie jest zmienną typu string.");
+        }
+
+        public void AddMoney(double money)
+        {
+            var doubleAsFloat = (float)money;
+            AddMoney(doubleAsFloat);
+        }
+
+        public void AddMoney(int money)
+        {
+            var intAsFloat = (float)money;
+            AddMoney(intAsFloat);
+        }
     }
 }

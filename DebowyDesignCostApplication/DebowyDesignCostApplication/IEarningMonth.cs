@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using static DebowyDesignCostApplication.EarningMonthBase;
+﻿using static DebowyDesignCostApplication.EarningMonthBase;
 
 namespace DebowyDesignCostApplication
 {

@@ -9,27 +9,28 @@ if (inputKey != null)
 
 Menu();
 
-var currentMonth = new EarningMonthInFile("");
-
-currentMonth.MoneyAdded += MoneyAdded;
+EarningMonthInFile currentMonth;
 
 var menuInput = Console.ReadLine();
 
 switch (menuInput)
 {
     case "1":
-        Console.Clear();
-        Console.WriteLine("Podaj miesiąc rozliczeniowy: (jeśli chcesz wyjść wypisz i zatwierdź q)");
-        Console.WriteLine();
+        MonthInputPrint();
 
         var monthInput = Console.ReadLine().ToLower();
 
         Console.WriteLine();
 
-        if (monthInput != null)
+        bool checkMonthInput = string.IsNullOrEmpty(monthInput);
+
+        if (checkMonthInput)
         {
-            currentMonth = new EarningMonthInFile(monthInput);
+            throw new Exception("Musisz podać nazwę miesiąca!");
         }
+
+        currentMonth = new EarningMonthInFile(monthInput);
+        currentMonth.MoneyAdded += MoneyAdded;
 
         while (true)
         {
@@ -131,5 +132,12 @@ void Menu()
     Console.WriteLine("Wybierz co chcesz zrobić (zatwierdź klawiszem enter):");
     Console.WriteLine("1. Dodać zarobioną kwotę");
     Console.WriteLine("2. Wyświetlić statystyki dla danego miesiąca");
+    Console.WriteLine();
+}
+
+void MonthInputPrint()
+{
+    Console.Clear();
+    Console.WriteLine("Podaj miesiąc rozliczeniowy: (jeśli chcesz wyjść wypisz i zatwierdź q)");
     Console.WriteLine();
 }

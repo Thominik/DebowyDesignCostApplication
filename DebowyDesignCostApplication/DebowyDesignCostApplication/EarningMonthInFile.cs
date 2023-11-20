@@ -28,26 +28,6 @@
                 throw new Exception("Podano złą wartość kwoty.");
         }
 
-        public override void AddMoney(double money)
-        {
-            var doubleAsFloat = (float)money;
-            AddMoney(doubleAsFloat);
-        }
-
-        public override void AddMoney(int money)
-        {
-            var intAsFloat = (float)money;
-            AddMoney(intAsFloat);
-        }
-
-        public override void AddMoney(string money)
-        {
-            if (float.TryParse(money, out float value))
-                AddMoney(value);
-            else
-                throw new Exception("Wprowadzona kwota nie jest zmienną typu string.");
-        }
-
         public override Statistics GetStatistics()
         {
             var moneyFromFile = ReadMoneyFromFile();
